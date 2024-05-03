@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org mic-org --project angular17-s26-01 ./dist && sentry-cli sourcemaps upload --org mic-org --project angular17-s26-01 ./dist"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,8 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@ngrx/store": "^16.3.0",
+    "@sentry/angular-ivy": "^7.113.0",
+    "@sentry/cli": "^2.31.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
