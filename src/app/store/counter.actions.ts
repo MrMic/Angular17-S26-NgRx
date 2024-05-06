@@ -1,8 +1,15 @@
-import { Action, createAction, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 // NOTE: ══════════════════════════ 1. First SOLUTION ══════════════════════════
 export const increment = createAction(
   '[Counter] Increment',
+  props<{
+    value: number;
+  }>(),
+);
+
+export const decrement = createAction(
+  '[Counter] Decrement',
   props<{
     value: number;
   }>(),
