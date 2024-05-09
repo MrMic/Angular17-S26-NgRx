@@ -1,7 +1,11 @@
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { decrement, increment } from './counter.actions';
+import { Injectable } from '@angular/core';
+
 import { tap } from 'rxjs';
 
+import { decrement, increment } from './counter.actions';
+
+@Injectable()
 export class CounterEffects {
   saveCount = createEffect(
     () =>
@@ -14,5 +18,6 @@ export class CounterEffects {
       ),
     { dispatch: false },
   );
+
   constructor(private actions$: Actions) { }
 }
