@@ -2,13 +2,32 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { tap, withLatestFrom } from 'rxjs';
+import { of, switchMap, tap, withLatestFrom } from 'rxjs';
 
-import { decrement, increment } from './counter.actions';
+import { decrement, increment, init, set } from './counter.actions';
 import { selectCount } from './counter.selector';
 
 @Injectable()
 export class CounterEffects {
+  // ______________________________________________________________________
+  loadCount = createEffect(() =>
+    this.actions$.pipe(
+      ofType(init),
+      switchMap(() => {
+        const storedCounter = localStorage.getItem('count');
+        if (storedCounter) {
+          return of(
+            set({ value: +storedCounter })
+          );
+        }
+        return of(
+          set({ value: 0 })
+        );
+      }),
+    ),
+  );
+
+  // ______________________________________________________________________
   saveCount = createEffect(
     () =>
       this.actions$.pipe(
